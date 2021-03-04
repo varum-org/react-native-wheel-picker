@@ -1,7 +1,8 @@
 {
-  "name": "wheel_picker",
-  "version": "0.0.1",
-  "private": true,
+  "name": "rn-wheel-picker",
+  "version": "1.0.0",
+  "description": "wheel picker for android",
+  "main": "index.js",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -9,6 +10,22 @@
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:VTNPlusD/react-native-wheel-picker.git"
+  },
+    "keywords": [
+    "WheelPicker",
+    "Javascript",
+    "TypeScript",
+    "Kotlin",
+    "umd"
+  ],
+  "author": "Nguyen Ngoc Duy <olololoe1001st2@gmail.com",
+  "bugs": {
+    "url": "https://github.com/VTNPlusD/react-native-wheel-picker/issues"
+  },
+  "homepage": "https://github.com/VTNPlusD/react-native-wheel-picker",
   "dependencies": {
     "react": "16.13.1",
     "react-native": "0.63.4"
