@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "wheel picker for android",
   "main": "index.js",
+  "license": "MIT",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -14,14 +15,14 @@
     "type": "git",
     "url": "git+ssh://git@github.com:VTNPlusD/react-native-wheel-picker.git"
   },
-    "keywords": [
+  "keywords": [
     "WheelPicker",
     "Javascript",
     "TypeScript",
     "Kotlin",
     "umd"
   ],
-  "author": "Nguyen Ngoc Duy <olololoe1001st2@gmail.com",
+  "author": "Nguyen Ngoc Duy <olololoe1001st2@gmail.com>",
   "bugs": {
     "url": "https://github.com/VTNPlusD/react-native-wheel-picker/issues"
   },
