@@ -39,7 +39,7 @@ export const pickerMonthArray = (minValue: Date): string[] => {
     const currentDate = moment(minValue, 'YYYY');
     const arr = [];
     for (let i = 0; i < MONTH; ++i) {
-        arr.push(currentDate.format('MM'));
+        arr.push(currentDate.format('MMMM'));
         currentDate.add(1, 'M');
     }
     return arr;

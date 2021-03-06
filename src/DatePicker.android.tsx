@@ -34,25 +34,21 @@ type Props = {
 
 const DatePicker: React.FC<Props> = (props) => {
     const { initDate, maximumDate, minimumDate, onDateSelected } = props;
-    const [selectedDate, setSelectedDate] = useState(new Date());
+    const maxValue = maximumDate || new Date(`${DEFAULT_END_YEAR}`);
+    const minValue = minimumDate || new Date(`${DEFAULT_START_YEAR}`);
     const [initDayIndex, setInitDayIndex] = useState(0);
     const [initMonthIndex, setInitMonthIndex] = useState(0);
     const [initYearIndex, setInitYearIndex] = useState(0);
-    const [maxValue, setMaxValue] = useState(new Date(`${DEFAULT_END_YEAR}`));
-    const [minValue, setMinValue] = useState(new Date(`${DEFAULT_START_YEAR}`));
+    const [selectedDate, setSelectedDate] = useState(initDate);
 
     useEffect(() => {
-        const selectedDate = initDate ? initDate : new Date();
-        const initDayIndex = selectedDate.getDate() - 1;
-        const initMonthIndex = selectedDate.getMonth();
-        const initYearIndex = selectedDate.getFullYear() - minValue.getFullYear();
-        setSelectedDate(selectedDate);
-        setInitDayIndex(initDayIndex);
-        setInitMonthIndex(initMonthIndex);
-        setInitYearIndex(initYearIndex);
-        if (maximumDate) setMaxValue(maximumDate);
-        if (minimumDate) setMinValue(minimumDate);
-    }, []);
+        const selectedDateFinal = getDateSelected(selectedDate);
+        setSelectedDate(selectedDateFinal);
+        setInitDayIndex(selectedDateFinal.getDate() - 1);
+        setInitMonthIndex(selectedDateFinal.getMonth());
+        setInitYearIndex(selectedDateFinal.getFullYear() - minValue.getFullYear());
+        if (onDateSelected) onDateSelected(selectedDateFinal);
+    }, [selectedDate]);
 
     const onDaySelected = (position: number) => {
         let newSelectedDate = selectedDate;
@@ -61,8 +57,10 @@ const DatePicker: React.FC<Props> = (props) => {
         newSelectedDate = increaseDateByDays(minValue, position);
         newSelectedDate.setFullYear(year);
         newSelectedDate.setMonth(month);
-        handleDateSelected(newSelectedDate);
-        setInitDayIndex(newSelectedDate.getDate() - 1);
+        if (newSelectedDate.getDate() !== selectedDate.getDate()) {
+            setInitDayIndex(position);
+            setSelectedDate(newSelectedDate);
+        }
     };
 
     const onMonthSelected = (position: number) => {
@@ -71,10 +69,11 @@ const DatePicker: React.FC<Props> = (props) => {
         const year = newSelectedDate.getFullYear();
         newSelectedDate = increaseMonthByMonths(minValue, position);
         newSelectedDate.setFullYear(year);
-        const initDayIndex = getDateInMonth(date, newSelectedDate) - 1;
         newSelectedDate.setDate(getDateInMonth(date, newSelectedDate));
-        handleDateSelected(newSelectedDate);
-        setInitDayIndex(initDayIndex);
+        if (newSelectedDate.getMonth() !== selectedDate.getMonth()) {
+            setInitMonthIndex(position);
+            setSelectedDate(newSelectedDate);
+        }
     };
 
     const onYearSelected = (position: number) => {
@@ -83,15 +82,21 @@ const DatePicker: React.FC<Props> = (props) => {
         const date = newSelectedDate.getDate();
         newSelectedDate = increaseYearByYears(minValue, position);
         newSelectedDate.setMonth(month);
-        const initDayIndex = getDateInMonth(date, newSelectedDate) - 1;
         newSelectedDate.setDate(getDateInMonth(date, newSelectedDate));
-        handleDateSelected(newSelectedDate);
-        setInitDayIndex(initDayIndex);
+        if (newSelectedDate.getFullYear() !== selectedDate.getFullYear()) {
+            setInitYearIndex(position);
+            setSelectedDate(newSelectedDate);
+        }
     };
 
-    const handleDateSelected = (selectedDate: Date) => {
-        setSelectedDate(selectedDate);
-        if (onDateSelected) onDateSelected(selectedDate);
+    const getDateSelected = (selectDate: Date): Date => {
+        if (selectDate.getTime() >= minValue.getTime() && selectDate.getTime() <= maxValue.getTime()) {
+            return selectDate;
+        } else if (selectDate.getTime() > maxValue.getTime()) {
+            return maxValue;
+        } else {
+            return minValue;
+        }
     };
 
     return (
@@ -100,17 +105,17 @@ const DatePicker: React.FC<Props> = (props) => {
                 style={styles.dateWheelPicker}
                 {...props}
                 isCyclic
-                data={pickerDateArray(selectedDate)}
-                onItemSelected={onDaySelected}
-                selectedItem={initDayIndex}
+                data={pickerMonthArray(minValue)}
+                onItemSelected={onMonthSelected}
+                selectedItem={initMonthIndex}
             />
             <WheelPicker
                 style={styles.dateWheelPicker}
                 {...props}
                 isCyclic
-                data={pickerMonthArray(minValue)}
-                onItemSelected={onMonthSelected}
-                selectedItem={initMonthIndex}
+                data={pickerDateArray(selectedDate)}
+                onItemSelected={onDaySelected}
+                selectedItem={initDayIndex}
             />
             <WheelPicker
                 style={styles.dateWheelPicker}
@@ -127,6 +132,10 @@ const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
         flexDirection: 'row',
+    },
+    wheelPicker: {
+        height: 150,
+        flex: 1,
     },
     dateWheelPicker: {
         height: 150,
