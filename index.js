@@ -1,3 +1,4 @@
-import WheelPicker from './src/WheelPickerAndroid';
+import WheelPicker from './src/WheelPicker';
+import DatePicker from './src/DatePicker';
 
-export {WheelPicker};
+export { WheelPicker, DatePicker };

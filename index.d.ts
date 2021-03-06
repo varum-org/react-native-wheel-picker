@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleProp, ViewStyle} from 'react-native';
+import { StyleProp, ViewStyle } from 'react-native';
 
 interface IStyle {
   selectedItemTextColor?: string;
@@ -23,4 +23,13 @@ export interface IPropsWheelPicker extends IStyle {
   onItemSelected?: (res: number) => void;
 }
 
-export class WheelPicker extends React.Component<IPropsWheelPicker> {}
+export class WheelPicker extends React.Component<IPropsWheelPicker> { }
+
+export interface IPropsDatePicker extends IStyle {
+  initDate: Date;
+  onDateSelected: (date: Date) => void;
+  maximumDate?: Date;
+  minimumDate?: Date;
+}
+
+export class DatePicker extends React.Component<IPropsDatePicker> {}
