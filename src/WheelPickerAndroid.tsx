@@ -1,7 +1,10 @@
 import React from 'react';
-import {requireNativeComponent} from 'react-native';
+import { requireNativeComponent, Platform, View } from 'react-native';
 
-const WheelPickerView = requireNativeComponent<Props>('WheelPicker');
+const WheelPickerView = Platform.select({
+  ios: View,
+  android: requireNativeComponent<Props>('WheelPicker') as any,
+});
 
 type Props = {
   onChange?: (event: any) => void;
@@ -21,7 +24,7 @@ type Props = {
 };
 
 const WheelPicker: React.FC<Props> = (props) => {
-  const {onItemSelected} = props;
+  const { onItemSelected } = props;
 
   const handleItemSelected = (event: any) => {
     if (onItemSelected) {

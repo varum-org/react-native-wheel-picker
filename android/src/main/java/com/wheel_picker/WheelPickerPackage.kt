@@ -8,14 +8,15 @@ import java.util.*
 
 class WheelPickerPackage : ReactPackage {
 	override fun createNativeModules(
-			reactContext: ReactApplicationContext): List<NativeModule> {
-		return ArrayList()
+			reactContext: ReactApplicationContext): MutableList<NativeModule> {
+		return mutableListOf()
 	}
 	
 	override fun createViewManagers(
-			reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
-		return Arrays.asList<ViewManager<*, *>>(
-				WheelPickerManager()
+		
+			reactContext: ReactApplicationContext): MutableList<ViewManager<*, *>> {
+		return mutableListOf(
+			WheelPickerManager()
 		)
 	}
 }
