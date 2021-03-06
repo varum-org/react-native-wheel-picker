@@ -130,7 +130,7 @@ class WheelPickerManager(
 	@ReactProp(name = "selectedItem")
 	fun setSelectedItem(wheelPicker: LoopView?, pos: Int) {
 		if (wheelPicker != null) {
-			wheelPicker.selectedItem = pos
+			wheelPicker.setPositionSelectedItem(pos)
 		}
 	}
 	
