@@ -1,3 +1,3 @@
-import WheelPicker from '.src/WheelPickerAndroid';
+import WheelPicker from './src/WheelPickerAndroid';
 
 export {WheelPicker};

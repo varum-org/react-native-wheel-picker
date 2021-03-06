@@ -1,8 +1,9 @@
 {
-  "name": "@duynn100198/react-native-wheel-picker",
+  "name": "@duynn100198/react-native-wheel-picker-android",
   "version": "1.0.0",
   "description": "wheel picker for android",
   "main": "index.js",
+  "types": "index.d.ts",
   "license": "UNLICENSED",
   "scripts": {
     "android": "react-native run-android",
@@ -29,6 +30,7 @@
   },
   "homepage": "https://github.com/VTNPlusD/react-native-wheel-picker",
   "dependencies": {
+    "@react-native-picker/picker": "^1.9.11",
     "react": "16.13.1",
     "react-native": "0.63.4"
   },
