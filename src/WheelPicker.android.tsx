@@ -1,10 +1,7 @@
 import React from 'react';
-import { requireNativeComponent, Platform, View } from 'react-native';
+import { requireNativeComponent } from 'react-native';
 
-const WheelPickerView = Platform.select({
-  ios: View,
-  android: requireNativeComponent<Props>('WheelPicker') as any,
-});
+const WheelPickerView = requireNativeComponent<Props>('WheelPicker')
 
 type Props = {
   onChange?: (event: any) => void;
