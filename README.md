@@ -1,8 +1,8 @@
 # react-native-wheel-picker-android
 <p>
-<img src="http://img.shields.io/npm/v/react-native-wheel-picker-android.svg" />
-<img src="https://img.shields.io/npm/dm/react-native-wheel-picker-android.svg" />
-<img src="https://img.shields.io/npm/dt/react-native-wheel-picker-android.svg" />
+<img src="http://img.shields.io/npm/v/@duynn110399/react-native-wheel-picker-android.svg" />
+<img src="https://img.shields.io/npm/dm/@duynn110399/react-native-wheel-picker-android.svg" />
+<img src="https://img.shields.io/npm/dt/@duynn110399/react-native-wheel-picker-android.svg" />
 </p>
 
 A simple Wheel Picker for Android
