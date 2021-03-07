@@ -15,8 +15,7 @@ import com.wheel_picker.loop.LoopListener
 import com.wheel_picker.loop.LoopView
 import java.util.*
 
-class WheelPickerManager(
-) : SimpleViewManager<LoopView?>(), LoopListener {
+class WheelPickerManager() : SimpleViewManager<LoopView?>(), LoopListener {
 	lateinit var wheelPicker:LoopView
 	
 	override fun getName(): String {
@@ -33,16 +32,15 @@ class WheelPickerManager(
 	@ReactProp(name = "data")
 	fun setData(wheelPicker: LoopView?, data: ReadableArray) {
 		if (wheelPicker != null) {
-			val emptyList: List<String> = ArrayList()
 			try {
-				val dataInt: MutableList<Int> = ArrayList()
+				val dataInt = arrayListOf<Int>()
 				for (i in 0 until data.size()) {
 					dataInt.add(data.getInt(i))
 				}
 				wheelPicker.arrayList = (dataInt as ArrayList<*>)
 			} catch (e: Exception) {
 				try {
-					val dataString: MutableList<String?> = ArrayList()
+					val dataString = arrayListOf<String?>()
 					var i = 0
 					while (i < data.size()) {
 						dataString.add(data.getString(i))
@@ -51,7 +49,7 @@ class WheelPickerManager(
 					wheelPicker.arrayList = (dataString as ArrayList<*>)
 				} catch (ex: Exception) {
 					ex.printStackTrace()
-					wheelPicker.arrayList = (emptyList as ArrayList<*>)
+					wheelPicker.arrayList = arrayListOf<String>()
 				}
 			}
 		}
@@ -59,9 +57,7 @@ class WheelPickerManager(
 	
 	@ReactProp(name = "isCyclic")
 	fun setCyclic(wheelPicker: LoopView?, isCyclic: Boolean?) {
-		if (wheelPicker != null) {
-			wheelPicker.isLoop = isCyclic!!
-		}
+		wheelPicker?.isLoop = isCyclic!!
 	}
 	
 	@ReactProp(name = "selectedItemTextColor")
@@ -76,9 +72,9 @@ class WheelPickerManager(
 	
 	@ReactProp(name = "selectedItemTextFontFamily")
 	fun setSelectedItemFont(wheelPicker: LoopView?, itemTextFontFamily: String?) {
-		if (wheelPicker != null) {
-			val typeface = ReactFontManager.getInstance().getTypeface(itemTextFontFamily, Typeface.NORMAL, wheelPicker.context.assets)
-			wheelPicker.setSelectedItemFont(typeface)
+		wheelPicker?.apply {
+			val typeface = ReactFontManager.getInstance().getTypeface(itemTextFontFamily, Typeface.NORMAL, context.assets)
+			setSelectedItemFont(typeface)
 		}
 	}
 	
@@ -109,17 +105,15 @@ class WheelPickerManager(
 	
 	@ReactProp(name = "itemTextFontFamily")
 	fun setItemFont(wheelPicker: LoopView?, itemTextFontFamily: String?) {
-		if (wheelPicker != null) {
-			val typeface = ReactFontManager.getInstance().getTypeface(itemTextFontFamily, Typeface.NORMAL, wheelPicker.context.assets)
-			wheelPicker.setItemFont(typeface)
+		wheelPicker?.apply {
+			val typeface = ReactFontManager.getInstance().getTypeface(itemTextFontFamily, Typeface.NORMAL, context.assets)
+			setItemFont(typeface)
 		}
 	}
 	
 	@ReactProp(name = "initPosition")
 	fun setInitialPosition(wheelPicker: LoopView?, selectedItemPosition: Int) {
-		if (wheelPicker != null) {
-			wheelPicker.initPosition = selectedItemPosition
-		}
+		wheelPicker?.initPosition = selectedItemPosition
 	}
 	
 	@ReactProp(name = "backgroundColor")
@@ -129,9 +123,7 @@ class WheelPickerManager(
 	
 	@ReactProp(name = "selectedItem")
 	fun setSelectedItem(wheelPicker: LoopView?, pos: Int) {
-		if (wheelPicker != null) {
-			wheelPicker.setPositionSelectedItem(pos)
-		}
+		wheelPicker?.setPositionSelectedItem(pos)
 	}
 	
 	override fun onItemSelect(view: LoopView, item: Int) {
@@ -148,12 +140,12 @@ class WheelPickerManager(
 			Color.parseColor(color)
 		} else {
 			val colors = color.substring(color.indexOf("(") + 1, color.length - 1).split(",".toRegex()).toTypedArray()
-			val red = colors[0].trim { it <= ' ' }.toInt()
-			val green = colors[1].trim { it <= ' ' }.toInt()
-			val blue = colors[2].trim { it <= ' ' }.toInt()
+			val red = colors[0].trim().toInt()
+			val green = colors[1].trim().toInt()
+			val blue = colors[2].trim().toInt()
 			var opacity = 1.0
 			if (colors.size > 3) {
-				opacity = colors[3].trim { it <= ' ' }.toDouble()
+				opacity = colors[3].trim().toDouble()
 			}
 			val alpha = (opacity * 255.0f).toInt()
 			Color.argb(alpha, red, green, blue)
