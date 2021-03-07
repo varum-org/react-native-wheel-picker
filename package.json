@@ -1,10 +1,10 @@
 {
   "name": "@duynn100198/react-native-wheel-picker-android",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "wheel picker for android",
   "main": "index.js",
   "types": "index.d.ts",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
