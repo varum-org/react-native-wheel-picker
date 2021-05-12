@@ -1,9 +1,8 @@
 {
-  "name": "@duynn100198/react-native-wheel-picker-android",
-  "version": "1.0.3",
-  "description": "wheel picker for android",
+  "name": "@duynn100198/react-native-scan-android",
+  "version": "0.0.1",
+  "description": "scan network for android",
   "main": "index.js",
-  "types": "index.d.ts",
   "license": "MIT",
   "scripts": {
     "android": "react-native run-android",
@@ -14,10 +13,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/VTNPlusD/react-native-wheel-picker.git"
+    "url": "git+ssh://git@github.com/VTNPlusD/react-native-scan.git"
   },
   "keywords": [
-    "WheelPicker",
+    "Scan",
     "Javascript",
     "TypeScript",
     "Kotlin",
@@ -25,10 +24,10 @@
   ],
   "author": "Nguyen Ngoc Duy <duynn100198@gmail.com>",
   "bugs": {
-    "url": "https://github.com/VTNPlusD/react-native-wheel-picker/issues",
+    "url": "https://github.com/VTNPlusD/react-native-scan/issues",
     "email": "duynn100198@gmail.com"
   },
-  "homepage": "https://github.com/VTNPlusD/react-native-wheel-picker",
+  "homepage": "https://github.com/VTNPlusD/react-native-scan",
   "dependencies": {
     "moment": "^2.29.1",
     "react": "16.13.1",

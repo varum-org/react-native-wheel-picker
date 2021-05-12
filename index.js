@@ -1,4 +1,9 @@
-import WheelPicker from './src/WheelPicker';
-import DatePicker from './src/DatePicker';
+import {
+  NativeModules,
+  Platform,
+} from 'react-native';
 
-export { WheelPicker, DatePicker };
+export default Platform.select({
+  ios: null,
+  android: NativeModules.Scanner,
+});
